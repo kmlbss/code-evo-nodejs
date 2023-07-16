@@ -1,0 +1,8 @@
+CommonJS is a module system specification for JavaScript that defines how modules should be written,
+ organized, and imported/exported in a server-side
+ JavaScript environment, such as Node.js.
+ The key features of CommonJS modules are as follows:
+
+1.Module Definition: In CommonJS, each module is defined in its own file. A module can export specific values or objects using the module.exports object or by modifying the exports object directly.
+2. Module Import: To use functionality from another module, you use the require() function. It allows you to import the exported values or objects from a specific module.
+3.Synchronous Behavior: CommonJS modules are designed to work synchronously. When a module is imported using require(), the import operation blocks the execution until the module is fully loaded and its exports are available.
