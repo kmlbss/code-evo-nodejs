@@ -15,3 +15,32 @@ CommonJS is a module system specification for JavaScript that defines how module
 --In JavaScript, IIFE stands for Immediately Invoked Function Expression. It is a design pattern used to create a function that is executed immediately after it is defined. The purpose of an IIFE is to create a new scope for variables, allowing you to encapsulate code and avoid naming conflicts with other parts of your program.
 ---------------------------------------------------------
 ES modules
+S modules, or ECMAScript modules, are a standardized module system introduced in ECMAScript 6 (ES6) that allows developers to organize and share code in a modular and reusable manner. While Node.js historically used the CommonJS module system (require/exports), it has gradually introduced support for ES modules starting from version 12.0.0.
+
+
+>>> Watch mode
+ the node --watch command is used in Node.js to enable a watch mode for a specific file. When you run node --watch <filename>, Node.js will monitor the specified file for changes and automatically restart the script whenever modifications are detected.
+
+For example, if you have a file named index.js and you want to enable watch mode for it, you can run the following command:
+>>>node --watch index.js
+
+-------------
+
+Built-ind modules in node
+
+1.fs (File System): The fs module provides APIs for interacting with the file system. It enables you to read from and write to files, manipulate directories, and perform other file-related operations.
+
+2.http and https: The http and https modules allow you to create HTTP or HTTPS servers and make HTTP requests. These modules enable you to build web servers, create RESTful APIs, and interact with external APIs.
+
+3.path: The path module provides utility functions for working with file and directory paths. It helps in resolving file paths, manipulating path strings, and handling file extensions.
+
+4.util: The util module contains various utility functions that provide additional functionality for working with JavaScript objects, including object inspection, type checking, and formatting.
+
+5.events: The events module provides an event-driven programming paradigm and is the basis for event handling in Node.js. It enables you to create custom event emitters and handle events asynchronously.
+
+6.crypto: The crypto module offers cryptographic functionality for generating hashes, encrypting and decrypting data, and working with digital signatures.
+
+7.os (Operating System): The os module provides information and utilities related to the operating system. It allows you to access information such as CPU architecture, memory, network interfaces, and more.
+-----------------------
+path.resolve() function, on the other hand, resolves an absolute path based on the given path segments. It treats the arguments as if they were entered from right to left and resolves the absolute path by navigating through the file system.
+
