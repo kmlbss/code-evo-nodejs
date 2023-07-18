@@ -1,37 +1,89 @@
-const path= require('node:path') // node: prefix is optional
+// const EventEmitter = require('node:events')
+const zlib=require('node:zlib')
+
+const gzip=zlib.createGzip()
 //
-// console.log(__dirname)
-// console.log(__filename)
+// const emitter=new EventEmitter()
 //
-// console.log(path.basename(__dirname))
-// console.log(path.basename(__filename))
+// emitter.on('order-pizza',(size,topping)=>{
+//     console.log(`order received! baking a ${size} pizza with ${topping}`)
+// })
 //
-// console.log(path.extname(__dirname))
-// console.log(path.extname(__filename))
+// emitter.on('order-pizza',(size)=>{
+//     if (size==='large'){
+//         console.log("serving a drink")
+//     }
+// })
 //
-// console.log(path.parse(__filename))
-// console.log(path.format(path.parse(__filename)))
-// console.log(path.isAbsolute(__filename))
+// emitter.emit('order-pizza','large','mushroom')
 
+//buffers
+const buffer = new Buffer.from("Kamala");
+//
+// buffer.write('Code')
+// console.log(buffer.toJSON())
+// console.log(buffer)
+// console.log(buffer.toString())
 
-// console.log(path.join('folder1','folder2','index.html'))
-// console.log(path.join(__dirname,'index.html'))
-// check the differences between join and resolve method
+//fs module(file-system)
+const fs = require("fs");
+//fs module internally uses the buffer
+// const fileContents=fs.readFileSync('./file.txt', 'utf-8')
+// console.log(fileContents)
 
+//reading file asynchronously
+// fs.readFile('./file.txt','utf-8',(error,data)=>{
+//     if(error)
+//         console.log(error)
+//     else {
+//         console.log(data)
+//     }
+// })
 
-function greet(name){
-    console.log(`hello ${name}`)
-}
+// fs.writeFileSync('./greet.txt','hello world')
 
-function greetKml(){
-    const name='kml'
-    greet(name)
-}
-// greetKml is  a higher order function which accepts a function as an argument
+//promises
 
-function higherOrderFunction(callback){
-    const name='kml'
-    callback(name)
-}
+// const fs = require("node:fs/promises");
+//
+// async function readFile() {
+//   try {
+//     const data = await fs.readFile("./file.txt", "utf-8");
+//     console.log(data);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+//
+// readFile()
 
-greetKml(greet)
+// fs.readFile('./file.txt','utf-8')
+// .then(data=> console.log(data))
+// .catch(err=> console.log(err))
+
+//streams
+// const readableStream = fs.createReadStream("./file.txt", {
+//   encoding: "utf-8",
+//   highWaterMark: 2,
+// });
+
+// const writeableStream = fs.createWriteStream("./file2.txt")
+
+//
+// readableStream.on("data", (chunk) => {
+//   console.log(chunk);
+//   writeableStream.write(chunk);
+// });
+
+//pipes
+const readableStream = fs.createReadStream("./file.txt", {
+ encoding: "utf-8",
+ highWaterMark: 2,
+});
+
+const writeableStream = fs.createWriteStream("./file2.txt")
+
+// readableStream.pipe(writeableStream)
+
+readableStream.pipe(gzip).pipe(fs.WriteStream('./file2.txt.gz'))
+
