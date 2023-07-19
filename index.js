@@ -1,89 +1,27 @@
-// const EventEmitter = require('node:events')
-const zlib=require('node:zlib')
-
-const gzip=zlib.createGzip()
+const http = require("node:http");
+const fs = require("node:fs");
+// const server = http.createServer((req, res) => {
+//   res.writeHead(200,{"Content-type":"text/plain"});
+//   res.end("hellp world");
+// });
 //
-// const emitter=new EventEmitter()
-//
-// emitter.on('order-pizza',(size,topping)=>{
-//     console.log(`order received! baking a ${size} pizza with ${topping}`)
-// })
-//
-// emitter.on('order-pizza',(size)=>{
-//     if (size==='large'){
-//         console.log("serving a drink")
-//     }
-// })
-//
-// emitter.emit('order-pizza','large','mushroom')
-
-//buffers
-const buffer = new Buffer.from("Kamala");
-//
-// buffer.write('Code')
-// console.log(buffer.toJSON())
-// console.log(buffer)
-// console.log(buffer.toString())
-
-//fs module(file-system)
-const fs = require("fs");
-//fs module internally uses the buffer
-// const fileContents=fs.readFileSync('./file.txt', 'utf-8')
-// console.log(fileContents)
-
-//reading file asynchronously
-// fs.readFile('./file.txt','utf-8',(error,data)=>{
-//     if(error)
-//         console.log(error)
-//     else {
-//         console.log(data)
-//     }
-// })
-
-// fs.writeFileSync('./greet.txt','hello world')
-
-//promises
-
-// const fs = require("node:fs/promises");
-//
-// async function readFile() {
-//   try {
-//     const data = await fs.readFile("./file.txt", "utf-8");
-//     console.log(data);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-//
-// readFile()
-
-// fs.readFile('./file.txt','utf-8')
-// .then(data=> console.log(data))
-// .catch(err=> console.log(err))
-
-//streams
-// const readableStream = fs.createReadStream("./file.txt", {
-//   encoding: "utf-8",
-//   highWaterMark: 2,
+// server.listen(3000, () => {
+//   console.log("server running on port 3000 ");
 // });
 
-// const writeableStream = fs.createWriteStream("./file2.txt")
-
-//
-// readableStream.on("data", (chunk) => {
-//   console.log(chunk);
-//   writeableStream.write(chunk);
-// });
-
-//pipes
-const readableStream = fs.createReadStream("./file.txt", {
- encoding: "utf-8",
- highWaterMark: 2,
+const server = http.createServer((req, res) => {
+  const superHero = {
+    firstName: "Kamala",
+    lastName: "Shamilova",
+  };
+  const name="Kamala"
+  res.writeHead(200, { "Content-type": "text/html" });
+  // fs.createReadStream(__dirname + '/index.html').pipe(res) //more advanced way of reading file
+  let html = fs.readFileSync("./index.html", "utf-8");
+  html=html.replace('{{name}}',name)
+  res.end(html);
 });
 
-const writeableStream = fs.createWriteStream("./file2.txt")
-
-// readableStream.pipe(writeableStream)
-
-readableStream.pipe(gzip).pipe(fs.WriteStream('./file2.txt.gz'))
-
+server.listen(3000, () => {
+  console.log("server running on port 3000 ");
+});
